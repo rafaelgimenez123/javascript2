@@ -17,11 +17,14 @@ class Alumno{
 }
 
 const CrearAlumno = () =>{
-    localStorage.setItem("alumnos", JSON.stringify(Alumno));
+  let listaAlumnos = JSON.parse(localStorage.getItem('alumnos')) || [];
+listaAlumnos.push(nuevoAlumno);
+localStorage.setItem('alumnos', JSON.stringify(listaAlumnos));
     event.preventDefault();
     const nuevoAlumno = new Alumno (alumno_nombre.value , alumno_curso.value , alumno_edad.value , alumno_descripcion.value)
     const Alumno_element = document.createElement("div");
     Alumno_element.classList.add("card");
+
     Alumno_element.innerHTML = `
     <div class="container_card">
     <ul>
