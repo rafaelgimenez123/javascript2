@@ -2,6 +2,7 @@ const alumno_nombre = document.getElementById("alumno_nombre")
 const alumno_curso = document.getElementById("alumno_curso")
 const alumno_edad = document.getElementById("alumno_edad")
 const alumno_descripcion = document.getElementById("alumno_descripcion")
+const contenedor_alumno = document.getElementById("contenedor_alumnos")
 
 
 
@@ -15,13 +16,13 @@ class Alumno{
 
 }
 
-const CrearAlumno = (event) =>{
+const CrearAlumno = () =>{
+    localStorage.setItem("alumnos", JSON.stringify(alumnos));
     event.preventDefault();
     const nuevoAlumno = new Alumno (alumno_nombre.value , alumno_curso.value , alumno_edad.value , alumno_descripcion.value)
     const Alumno_element = document.createElement("div");
     Alumno_element.classList.add("card");
     Alumno_element.innerHTML = `
-    <div class = "padre">
     <div class="container_card">
     <ul>
       <li>Nombre alumno:${nuevoAlumno.nombre}</li>
@@ -30,10 +31,10 @@ const CrearAlumno = (event) =>{
       <li>Descripcion alumno${nuevoAlumno.descripcion}:</li>
     </ul>
   </div>
-    </div>
+
 
     `
-    document.body.appendChild(Alumno_element);
+    contenedor_alumno.appendChild(Alumno_element);
 
 }
 
