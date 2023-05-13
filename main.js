@@ -17,7 +17,7 @@ class Alumno{
 }
 
 const CrearAlumno = () =>{
-    localStorage.setItem("alumnos", JSON.stringify(alumnos));
+    localStorage.setItem("alumnos", JSON.stringify(Alumno));
     event.preventDefault();
     const nuevoAlumno = new Alumno (alumno_nombre.value , alumno_curso.value , alumno_edad.value , alumno_descripcion.value)
     const Alumno_element = document.createElement("div");
