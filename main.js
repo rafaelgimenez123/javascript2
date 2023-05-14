@@ -1,5 +1,3 @@
-
-
 class Alumno {
   constructor(nombre, curso, edad, descripcion) {
     this.nombre = nombre;
@@ -9,21 +7,33 @@ class Alumno {
   }
 }
 
-const obtenerDatosAPI = async () => {
-  try {
-    const response = await fetch(API_URL);
-    if (!response.ok) {
-      throw new Error("Error al obtener los datos de la API");
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
+const alumnosPrefabricados = [{
+  nombre: "Juan Pérez",
+  curso: "3er año",
+  edad: "20 años",
+  descripcion: "Estudiante destacado en matematicas"
+},
+{
+  nombre: "Luca lopez",
+  curso: "3er año",
+  edad: "23 años",
+  descripcion: "Estudiante destacado en sociologia"
+},
+{
+  nombre: "Jimmy donnaldson",
+  curso: "3er año",
+  edad: "22 años",
+  descripcion: "Estudiante destacado en fisica"
+},
+{
+  nombre: "Luca lopez",
+  curso: "3er año",
+  edad: "19 años",
+  descripcion: "Estudiante destacado en Quimica"
+}
+];
 
-const CrearAlumno = async (event) => {
+const CrearAlumno = (event) => {
   event.preventDefault();
 
   const alumno_nombre = document.getElementById("alumno_nombre");
@@ -37,37 +47,33 @@ const CrearAlumno = async (event) => {
     return;
   }
 
-  const datosAPI = await obtenerDatosAPI();
-  if (datosAPI) {
-    const nuevoAlumno = new Alumno(
-      alumno_nombre.value,
-      alumno_curso.value,
-      alumno_edad.value,
-      alumno_descripcion.value
-    );
+  const nuevoAlumno = new Alumno(
+    alumno_nombre.value,
+    alumno_curso.value,
+    alumno_edad.value,
+    alumno_descripcion.value
+  );
 
-    let listaAlumnos = JSON.parse(localStorage.getItem('alumnos')) || [];
-    listaAlumnos.push(nuevoAlumno);
-    localStorage.setItem('alumnos', JSON.stringify(listaAlumnos));
+  let listaAlumnos = JSON.parse(localStorage.getItem('alumnos')) || [];
+  listaAlumnos.push(nuevoAlumno);
+  localStorage.setItem('alumnos', JSON.stringify(listaAlumnos));
 
-    const Alumno_element = document.createElement("div");
-    Alumno_element.classList.add("card");
-    Alumno_element.innerHTML = `
-      <div class="container_card">
-        <h3>${nuevoAlumno.nombre}</h3>
-        <ul>
-          <li>Edad alumno: ${nuevoAlumno.edad}</li>
-          <li>Curso alumno: ${nuevoAlumno.curso}</li>
-          <li>Descripción alumno: ${nuevoAlumno.descripcion}</li>
-        </ul>
-      </div>
-    `;
+  const Alumno_element = document.createElement("div");
+  Alumno_element.classList.add("card");
+  Alumno_element.innerHTML = `
+    <div class="container_card">
+      <h3>${nuevoAlumno.nombre}</h3>
+      <ul>
+        <li>Edad alumno: ${nuevoAlumno.edad}</li>
+        <li>Curso alumno: ${nuevoAlumno.curso}</li>
+        <li>Descripción alumno: ${nuevoAlumno.descripcion}</li>
+      </ul>
+    </div>
+  `;
 
-    contenedor_alumno.appendChild(Alumno_element);
-  } else {
-    Swal.fire('Error al obtener los datos de la API');
-  }
+  contenedor_alumno.appendChild(Alumno_element);
 };
+
 
 const mostrarAlumnos = () => {
   const contenedor_alumno = document.getElementById("contenedor_alumnos");
@@ -94,6 +100,5 @@ const mostrarAlumnos = () => {
 const form = document.getElementById("submit_button_form");
 form.addEventListener("submit", CrearAlumno);
 
-
 mostrarAlumnos();
-``
+
