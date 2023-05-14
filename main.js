@@ -1,4 +1,4 @@
-const API_URL = "https://jsonplaceholder.typicode.com/users";
+
 
 class Alumno {
   constructor(nombre, curso, edad, descripcion) {
