@@ -69,7 +69,6 @@ const CrearAlumno = async (event) => {
   }
 };
 
-// Obtener los alumnos del Local Storage y mostrarlos en la página
 const mostrarAlumnos = () => {
   const contenedor_alumno = document.getElementById("contenedor_alumnos");
   const listaAlumnos = JSON.parse(localStorage.getItem('alumnos')) || [];
@@ -95,6 +94,6 @@ const mostrarAlumnos = () => {
 const form = document.getElementById("submit_button_form");
 form.addEventListener("submit", CrearAlumno);
 
-// Mostrar los alumnos al cargar la página
+
 mostrarAlumnos();
 ``
