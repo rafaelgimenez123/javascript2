@@ -46,13 +46,12 @@ const CrearAlumno = async (event) => {
       alumno_descripcion.value
     );
 
-    const Alumno_element = document.createElement("div");
-    Alumno_element.classList.add("card");
-
     let listaAlumnos = JSON.parse(localStorage.getItem('alumnos')) || [];
     listaAlumnos.push(nuevoAlumno);
     localStorage.setItem('alumnos', JSON.stringify(listaAlumnos));
 
+    const Alumno_element = document.createElement("div");
+    Alumno_element.classList.add("card");
     Alumno_element.innerHTML = `
       <div class="container_card">
         <h3>${nuevoAlumno.nombre}</h3>
@@ -70,6 +69,32 @@ const CrearAlumno = async (event) => {
   }
 };
 
+// Obtener los alumnos del Local Storage y mostrarlos en la página
+const mostrarAlumnos = () => {
+  const contenedor_alumno = document.getElementById("contenedor_alumnos");
+  const listaAlumnos = JSON.parse(localStorage.getItem('alumnos')) || [];
+
+  listaAlumnos.forEach((alumno) => {
+    const Alumno_element = document.createElement("div");
+    Alumno_element.classList.add("card");
+    Alumno_element.innerHTML = `
+      <div class="container_card">
+        <h3>${alumno.nombre}</h3>
+        <ul>
+          <li>Edad alumno: ${alumno.edad}</li>
+          <li>Curso alumno: ${alumno.curso}</li>
+          <li>Descripción alumno: ${alumno.descripcion}</li>
+        </ul>
+      </div>
+    `;
+
+    contenedor_alumno.appendChild(Alumno_element);
+  });
+};
+
 const form = document.getElementById("submit_button_form");
 form.addEventListener("submit", CrearAlumno);
 
+// Mostrar los alumnos al cargar la página
+mostrarAlumnos();
+``
